@@ -6,7 +6,7 @@ class FieldsController < ApplicationController
   def index
     category_id = params[:category_id]
 
-    @fields = if category_id && !category_id.blank?
+    @fields = unless category_id.blank?
       Field.where(category_id: category_id)
     else
       Field.all

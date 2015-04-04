@@ -1,0 +1,16 @@
+h1 Home#index
+
+ul
+  - @categories.each do |category|
+    li = link_to category.name, root_path({ category_id: category.id })
+
+
+.panel
+  - if @documents.any?
+    - @documents.each do |doc|
+      p
+        h3 = doc.created_at
+        p = doc.data
+  - else
+    h3 Sorry, no fetched information yet..
+

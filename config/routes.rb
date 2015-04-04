@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'fields#index'
+  root 'home#index'
 
   resources :documents
   resources :categories

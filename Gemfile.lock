@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: 52ffefcbe4e89cb172e2007eda0f74ac40798727
+  specs:
+    annotate (2.6.8)
+      activerecord (>= 3.2, <= 4.3)
+      rake (~> 10.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -174,6 +182,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate!
   better_errors
   bootstrap-sass
   byebug

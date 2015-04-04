@@ -1,5 +1,9 @@
 class Field < ActiveRecord::Base
   belongs_to :category
+
+  def name_with_type
+    "#{name}: #{field_type.capitalize}"
+  end
 end
 
 # == Schema Information

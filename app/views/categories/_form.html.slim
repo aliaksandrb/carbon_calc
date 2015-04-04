@@ -4,5 +4,8 @@
   .form-inputs
     = f.input :name
 
+  .form-inputs
+    = f.association :fields, label_method: :name_with_type, value_method: :id, include_blank: false
+
   .form-actions
     = f.button :submit

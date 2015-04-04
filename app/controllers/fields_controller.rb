@@ -4,7 +4,13 @@ class FieldsController < ApplicationController
   # GET /fields
   # GET /fields.json
   def index
-    @fields = Field.all
+    category_id = params[:category_id]
+
+    @fields = if category_id && !category_id.blank?
+      Field.where(category_id: category_id)
+    else
+      Field.all
+    end
   end
 
   # GET /fields/1

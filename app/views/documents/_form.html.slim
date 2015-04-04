@@ -2,8 +2,13 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :data
-    = f.input :category_id
+    = f.association :category, include_blank: false
+
+  .data-panel
+    - if data_hash = @document.deserialize_data
+      - data_hash.each do |k, v|
+        .form-inputs
+          = f.input k, input_html: { name: "document[data[#{k}]]" }
 
   .form-actions
     = f.button :submit

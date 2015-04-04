@@ -62,13 +62,12 @@ class DocumentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_document
       @document = Document.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:data, :category_id)
+      raw_params = params.require(:document).permit(:category_id, data: params[:document][:data].try(:keys))
+      raw_params.merge(data: raw_params[:data].to_json)
     end
 end

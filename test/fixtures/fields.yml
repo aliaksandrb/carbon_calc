@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  field_type: MyString
+  default_value: MyString
+
+two:
+  name: MyString
+  field_type: MyString
+  default_value: MyString
+
+# == Schema Information
+#
+# Table name: fields
+#
+#  id            :integer          not null, primary key
+#  name          :string           not null
+#  field_type    :string           default("string")
+#  default_value :string
+#

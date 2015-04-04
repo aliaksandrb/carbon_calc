@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @field.name
+p
+  strong Field type:
+  = @field.field_type
+p
+  strong Default value:
+  = @field.default_value
+
+= link_to 'Edit', edit_field_path(@field)
+'|
+= link_to 'Back', fields_path

@@ -1,6 +1,8 @@
 class Document < ActiveRecord::Base
   belongs_to :category
 
+  validates :data, :category, presence: true
+
   def fields
     category ? category.fields : []
   end

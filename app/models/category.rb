@@ -1,6 +1,9 @@
 class Category < ActiveRecord::Base
-  has_many :documents
+  has_many :documents, dependent: :destroy
   has_many :fields
+
+  validates :name, presence: true, format: { with: /\A[a-zA-Z]\w*\z/ }
+  validates_presence_of :fields
 end
 
 # == Schema Information

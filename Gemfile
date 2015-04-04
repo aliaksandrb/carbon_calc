@@ -44,3 +44,21 @@ group :development, :test do
   gem 'spring'
 end
 
+
+gem 'bootstrap-sass'
+gem 'simple_form'
+gem 'slim-rails'
+
+group :development do
+  gem 'better_errors'
+  gem 'haml2slim'
+  gem 'html2haml'
+  gem 'quiet_assets'
+  gem 'rails_apps_pages'
+  gem 'rails_layout'
+end
+
+group :production do
+  gem 'unicorn'
+end
+

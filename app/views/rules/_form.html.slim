@@ -1,0 +1,13 @@
+= simple_form_for(@rule) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :field_type
+    = f.input :field_name
+    = f.input :operation
+    = f.input :comparative
+    = f.input :points
+    = f.association :category
+
+  .form-actions
+    = f.button :submit

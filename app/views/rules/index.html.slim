@@ -1,0 +1,31 @@
+h1 Listing rules
+
+table
+  thead
+    tr
+      th Field type
+      th Field name
+      th Operation
+      th Comparative
+      th Points
+      th Category
+      th
+      th
+      th
+
+  tbody
+    - @rules.each do |rule|
+      tr
+        td = rule.field_type
+        td = rule.field_name
+        td = rule.operation
+        td = rule.comparative
+        td = rule.points
+        td = rule.category
+        td = link_to 'Show', rule
+        td = link_to 'Edit', edit_rule_path(rule)
+        td = link_to 'Destroy', rule, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Rule', new_rule_path

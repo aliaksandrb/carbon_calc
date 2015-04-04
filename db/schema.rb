@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404162713) do
+ActiveRecord::Schema.define(version: 20150404224947) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
@@ -34,5 +34,18 @@ ActiveRecord::Schema.define(version: 20150404162713) do
   end
 
   add_index "fields", ["category_id"], name: "index_fields_on_category_id"
+
+  create_table "rules", force: :cascade do |t|
+    t.string   "field_type",  default: "Integer"
+    t.string   "field_name",                      null: false
+    t.string   "operation",                       null: false
+    t.string   "comparative",                     null: false
+    t.integer  "points",      default: 0
+    t.integer  "category_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "rules", ["category_id"], name: "index_rules_on_category_id"
 
 end

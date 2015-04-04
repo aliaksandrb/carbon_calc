@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rules
   root 'home#index'
 
   resources :documents

@@ -1,0 +1,24 @@
+p#notice = notice
+
+p
+  strong Field type:
+  = @rule.field_type
+p
+  strong Field name:
+  = @rule.field_name
+p
+  strong Operation:
+  = @rule.operation
+p
+  strong Comparative:
+  = @rule.comparative
+p
+  strong Points:
+  = @rule.points
+p
+  strong Category:
+  = @rule.category
+
+= link_to 'Edit', edit_rule_path(@rule)
+'|
+= link_to 'Back', rules_path

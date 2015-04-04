@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404161520) do
+ActiveRecord::Schema.define(version: 20150404162713) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
@@ -27,9 +27,12 @@ ActiveRecord::Schema.define(version: 20150404161520) do
   add_index "documents", ["category_id"], name: "index_documents_on_category_id"
 
   create_table "fields", force: :cascade do |t|
-    t.string "name",                             null: false
-    t.string "field_type",    default: "string"
-    t.string "default_value"
+    t.string  "name",                             null: false
+    t.string  "field_type",    default: "string"
+    t.string  "default_value"
+    t.integer "category_id"
   end
+
+  add_index "fields", ["category_id"], name: "index_fields_on_category_id"
 
 end

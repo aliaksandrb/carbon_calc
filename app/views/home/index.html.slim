@@ -1,15 +1,18 @@
-section.chart-area
-  ul.chart-nav.list-inline
-    li = link_to 'General Overview', root_path({ category_id: 0 }),
-      class: @category_name == 'General Overview' ? 'active' : ''
+section.chart-area.row
+  h2.text-center Overview
 
-    - @categories.each do |category|
-      li = link_to category.name, root_path({ category_id: category.id }),
-        class: category.id.to_s == params[:category_id] ? 'active' : ''
+  .col-sm-2.col-xs-12
+    ul.chart-nav.nav.text-left
+      li = link_to 'General Overview', root_path({ category_id: 0 }),
+        class: @category_name == 'General Overview' ? 'active' : ''
 
-  .chart-container.text-center
-    h3 = "Chart for: #{@category_name}"
-    canvas#myChart width="600" height="400"
+      - @categories.each do |category|
+        li = link_to category.name, root_path({ category_id: category.id }),
+          class: category.id.to_s == params[:category_id] ? 'active' : ''
+
+  .col-sm-10.col-xs-12
+    .chart-container
+      h4 = "Chart for: #{@category_name}"
 
 .panel
   - if @documents.any?

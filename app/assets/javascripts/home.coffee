@@ -45,7 +45,10 @@ $( ->
       )
 
       ctx = container_for_chart.get(0).getContext("2d")
-      chart_container.append(container_for_chart)
+      chart_container.append([
+        '<h4>CHART FOR: ' + chart_data.label.toUpperCase() + '</h4>'
+        container_for_chart
+      ])
       myLineChart = new Chart(ctx).Line(data, options)
     else
       chart_container.empty()

@@ -28,7 +28,10 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
+        format.html do
+          redirect_to new_rule_path({ category_id: @category.id }),
+                                    notice: 'Category was successfully created. Create rules for it now.'
+        end
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new }

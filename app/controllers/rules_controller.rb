@@ -15,10 +15,12 @@ class RulesController < ApplicationController
   # GET /rules/new
   def new
     @rule = Rule.new
+    @category = Category.includes(:fields).find_by(id: params[:category_id])
   end
 
   # GET /rules/1/edit
   def edit
+    @category = @rule.category
   end
 
   # POST /rules

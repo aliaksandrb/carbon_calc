@@ -1,11 +1,12 @@
 class Field < ActiveRecord::Base
+  SUPPORTED_TYPES = %w(Integer String Boolean)
   belongs_to :category
 
   before_validation :normalize_field_type
 
   validates :name, :field_type, :default_value, presence: true
   validates :name, format: { with: /\A[a-zA-Z]\w*\z/ }
-  validates :field_type, inclusion: { in: %w(Integer String Boolean) }
+  validates :field_type, inclusion: { in: SUPPORTED_TYPES }
 
   def name_with_type
     "#{name}: #{field_type}"

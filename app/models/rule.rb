@@ -7,13 +7,13 @@ class Rule < ActiveRecord::Base
   def self.options_for_type(type)
     case type
     when 'string'
-      ['=']
+      ['==']
     when 'integer'
-      %w(= > < * / >= <=)
+      %w(== > < * / >= <=)
     when 'boolean'
-      ['=', '!=']
+      ['==', '!=']
     else
-      ['=']
+      ['==']
     end
   end
 end

@@ -4,6 +4,8 @@ class Document < ActiveRecord::Base
 
   validates :data, :category, presence: true
 
+  after_save :create_result!
+
   def fields
     category ? category.fields : []
   end
@@ -20,6 +22,30 @@ class Document < ActiveRecord::Base
     else
       super
     end
+  end
+
+  protected
+
+  def create_result!
+    self.create_result(category_id: category_id, points: calculate_points)
+  end
+
+  def calculate_points
+    rules = Rule.where(category_id: category_id)
+    points = 0
+    data_hash = deserialize_data
+
+    rules.each do |rule|
+      raw_value = data_hash[rule.field_name]
+
+      if raw_value
+        if eval("#{raw_value} #{rule.operation} #{rule.comparative}")
+          points += rule.points
+        end
+      end
+    end
+
+    points
   end
 end
 

@@ -35,7 +35,7 @@ $( ->
 
       $.each(data, (index, value) ->
         options.push(
-          "<option data-type='" + value.field_type + "' value='" + value.id + "'>" + value.name + "</option>"
+          "<option data-type='" + value.field_type + "' value='" + value.name + "'>" + value.name + "</option>"
         )
       )
 
@@ -47,9 +47,8 @@ $( ->
     $('#rule_field_type').val(field_type).change()
 
 
-  if $("form[id^='edit_rule_']").size() > 0
-    category_dropdown = $('#rule_category')
-  else
+  category_dropdown = $('#rule_category')
+  unless category_dropdown.size() > 0
     category_dropdown = $('#rule_category_id')
 
   if category_dropdown.size() > 0

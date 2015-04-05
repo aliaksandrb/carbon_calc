@@ -38,6 +38,7 @@ class Rule < ActiveRecord::Base
       end
 
       if raw_value
+        #Rails.logger.debug("_______ #{"#{raw_value} #{rule.operation} #{rule_comparative}"}____")
         result = eval("#{raw_value} #{rule.operation} #{rule_comparative}")
 
         if result && rule.field_type == 'Integer' && rule.operation.in?(%w(* /))

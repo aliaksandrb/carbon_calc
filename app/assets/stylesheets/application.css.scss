@@ -18,6 +18,11 @@
 $light-green: rgba(40, 182, 44, 1);
 
 .navbar-fixed-top, ul.nav.navbar-nav {
+  span.glyphicon {
+    font-size: 30px;
+    color: $light-green;
+  }
+
   a.active {
     color: $light-green;
   }

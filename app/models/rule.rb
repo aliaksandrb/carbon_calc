@@ -25,10 +25,24 @@ class Rule < ActiveRecord::Base
     data_hash = document.deserialize_data
 
     rules.each do |rule|
-      raw_value = data_hash[rule.field_name]
+      case rule.field_type
+      when 'String'
+        raw_value = "\'#{data_hash[rule.field_name]}\'"
+        rule_comparative = "\'#{rule.comparative}\'"
+      when 'Integer', 'Boolean'
+        raw_value = data_hash[rule.field_name]
+        rule_comparative = rule.comparative
+      else
+        raw_value = nil
+        rule_comparative = rule.comparative
+      end
 
       if raw_value
-        if eval("#{raw_value} #{rule.operation} #{rule.comparative}")
+        result = eval("#{raw_value} #{rule.operation} #{rule_comparative}")
+
+        if result && rule.field_type == 'Integer' && rule.operation.in?(%w(* /))
+          points += rule.points * result
+        else
           points += rule.points
         end
       end

@@ -63,6 +63,15 @@ class RulesController < ApplicationController
     end
   end
 
+  def get_operations
+    type = params[:field_type].downcase
+    options = { type => Rule.options_for_type(type) }
+
+    respond_to do |format|
+      format.json { render json: options, status: :ok }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rule

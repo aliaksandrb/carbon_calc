@@ -1,5 +1,21 @@
 class Rule < ActiveRecord::Base
   belongs_to :category
+
+  validates :field_type, :field_name, :operation, :comparative, :points, presence: true
+  validates :field_type, inclusion: { in: Field::SUPPORTED_TYPES }
+
+  def self.options_for_type(type)
+    case type
+    when 'string'
+      ['=']
+    when 'integer'
+      %w(= > < * / >= <=)
+    when 'boolean'
+      ['=', '!=']
+    else
+      ['=']
+    end
+  end
 end
 
 # == Schema Information

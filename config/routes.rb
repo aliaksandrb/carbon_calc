@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  resources :rules
   root 'home#index'
+
+  get 'rules/get_operations' => 'rules#get_operations'
 
   resources :documents
   resources :categories
   resources :fields
+  resources :rules
 end

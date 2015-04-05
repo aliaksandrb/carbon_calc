@@ -7,12 +7,12 @@ class ResultsController < ApplicationController
       chart_data[:label] = Category.find(category_id).name
       Result.where(category_id: category_id)
     else
-      chart_data[:label] = 'General Chart'
+      chart_data[:label] = 'General Overview'
       Result.all
     end
 
     results.each do |result|
-      chart_data[:labels] << result.created_at
+      chart_data[:labels] << result.created_at.strftime('%d:%m:%y')
       chart_data[:data]   << result.points
     end
 

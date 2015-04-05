@@ -14,26 +14,29 @@ $( ->
     },
     dataType: 'JSON'
   }).success((chart_data) ->
-    data = {
-      labels: chart_data.labels,
-      datasets: [
-        {
-            label: chart_data.label,
-            fillColor: "rgba(40, 182, 44, 0.5)",
-            strokeColor: "rgba(40, 182, 44, 1)",
-            pointColor: "rgba(40, 182, 44, 1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(40, 182, 44, 1)",
-            data: chart_data.data
-        }
-      ]
-    }
+    if chart_data.data.length > 0
+      data = {
+        labels: chart_data.labels,
+        datasets: [
+          {
+              label: chart_data.label,
+              fillColor: "rgba(40, 182, 44, 0.5)",
+              strokeColor: "rgba(40, 182, 44, 1)",
+              pointColor: "rgba(40, 182, 44, 1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(40, 182, 44, 1)",
+              data: chart_data.data
+          }
+        ]
+      }
 
-    options = {}
+      options = {}
 
-    ctx = $("#myChart").get(0).getContext("2d")
-    myLineChart = new Chart(ctx).Line(data, options)
+      ctx = $("#myChart").get(0).getContext("2d")
+      myLineChart = new Chart(ctx).Line(data, options)
+    else
+      $('.chart-container').empty()
   )
 )
 

@@ -21,7 +21,7 @@ table
         td = rule.operation
         td = rule.comparative
         td = rule.points
-        td = rule.category
+        td = rule.category.name
         td = link_to 'Show', rule
         td = link_to 'Edit', edit_rule_path(rule)
         td = link_to 'Destroy', rule, data: {:confirm => 'Are you sure?'}, :method => :delete

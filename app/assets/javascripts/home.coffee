@@ -114,7 +114,9 @@ $( ->
           })
         )
 
-        options = {}
+        options = {
+          legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend list-unstyled \"><% for (var i=0; i<segments.length; i++){%><li><span class=\"glyphicon glyphicon-tree-deciduous\" aria-hidden=\"true\" style=\"background-color:<%=segments[i].fillColor%>;color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+        }
 
         container_for_chart = $('<canvas height="300" id="chart-insides-right" width="' +
           chart_container_right.width() + '"></canvas>'
@@ -123,6 +125,7 @@ $( ->
         ctx = container_for_chart.get(0).getContext("2d")
         chart_container_right.append(container_for_chart)
         myPieChart = new Chart(ctx).Pie(data_right, options)
+        chart_container_right.append(myPieChart.generateLegend())
       else
         chart_container_right.empty()
     )
@@ -158,7 +161,9 @@ $( ->
 
         data_left.datasets = datasets
         options = {
-                }
+            legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend list-unstyled\"><% for (var i=0; i<datasets.length; i++){%><li><span class=\"glyphicon glyphicon-tree-deciduous\" aria-hidden=\"true\" style=\"background-color:<%=datasets[i].fillColor%>;color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+        }
+
         container_for_chart = $('<canvas height="300" id="chart-insides-left" width="' +
           chart_container_left.width() + '"></canvas>'
         )
@@ -166,6 +171,7 @@ $( ->
         ctx = container_for_chart.get(0).getContext("2d")
         chart_container_left.append(container_for_chart)
         myBarChart = new Chart(ctx).Bar(data_left, options)
+        chart_container_left.append(myBarChart.generateLegend())
       else
         chart_container_left.empty()
     )

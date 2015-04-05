@@ -37,5 +37,9 @@ section.news {
   }
 }
 
-.bar-legend {
+.bar-legend, .pie-legend {
+  li span {
+    padding: 3px;
+    margin: 5px;
+  }
 }

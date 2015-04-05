@@ -31,21 +31,7 @@ class Document < ActiveRecord::Base
   end
 
   def calculate_points
-    rules = Rule.where(category_id: category_id)
-    points = 0
-    data_hash = deserialize_data
-
-    rules.each do |rule|
-      raw_value = data_hash[rule.field_name]
-
-      if raw_value
-        if eval("#{raw_value} #{rule.operation} #{rule.comparative}")
-          points += rule.points
-        end
-      end
-    end
-
-    points
+    Rule.calculate_for!(self)
   end
 end
 

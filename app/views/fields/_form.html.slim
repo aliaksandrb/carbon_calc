@@ -3,7 +3,7 @@
 
   .form-inputs
     = f.input :name
-    = f.input :field_type
+    = f.input :field_type, collection: Field::SUPPORTED_TYPES, include_blank: false
     = f.input :default_value
 
   .form-actions

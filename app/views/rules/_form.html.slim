@@ -4,7 +4,7 @@
   .form-inputs
     = f.input :field_type, collection: field_types_for_rule(@category), include_blank: false
     = f.input :field_name, collection: field_names_for_rule(@category), include_blank: false
-    = f.input :operation, include_blank: false
+    = f.input :operation, collection: [], include_blank: false
     = f.input :comparative
     = f.input :points
     - if @category

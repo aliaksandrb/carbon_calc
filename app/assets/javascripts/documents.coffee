@@ -28,10 +28,11 @@ $( ->
 
   dropdown = $('#document_category_id')
 
-  unless $("form[id^='edit_document_']").length > 0
-    add_fiedls_to_panel(dropdown.val())
+  if dropdown.length > 0
+    unless $("form[id^='edit_document_']").length > 0
+      add_fiedls_to_panel(dropdown.val())
 
-  dropdown.on('change', ->
-    add_fiedls_to_panel(this.value)
-  )
+    dropdown.on('change', ->
+      add_fiedls_to_panel(this.value)
+    )
 )

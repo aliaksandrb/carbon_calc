@@ -109,14 +109,14 @@ $( ->
           data_right.push({
             value: value.value,
             color: color,
-            highlight: colorTone(color, 30),
+            highlight: colorTone(color, 20),
             label: value.label
           })
         )
 
         options = {}
 
-        container_for_chart = $('<canvas height="300" id="chart-insides" width="' +
+        container_for_chart = $('<canvas height="300" id="chart-insides-right" width="' +
           chart_container_right.width() + '"></canvas>'
         )
 
@@ -125,6 +125,49 @@ $( ->
         myPieChart = new Chart(ctx).Pie(data_right, options)
       else
         chart_container_right.empty()
+    )
+
+    $.ajax({
+      url: '/results/insides_historical',
+      data: {
+        format: 'json',
+      },
+      dataType: 'JSON'
+    }).success((chart_data) ->
+      chart_container_left = $('.chart-insides-left')
+
+      if chart_data.labels.length > 0
+        data_left = {
+          labels: chart_data.labels,
+        }
+
+        datasets = []
+
+        $.each(chart_data.datasets, (index, value) ->
+          color = randomColor()
+
+          datasets.push({
+            label: value.label,
+            fillColor: color,
+            strokeColor: colorTone(color, -40),
+            highlightFill: colorTone(color, 20),
+            highlightStroke: colorTone(color, -20),
+            data: value.data
+          })
+        )
+
+        data_left.datasets = datasets
+        options = {
+                }
+        container_for_chart = $('<canvas height="300" id="chart-insides-left" width="' +
+          chart_container_left.width() + '"></canvas>'
+        )
+
+        ctx = container_for_chart.get(0).getContext("2d")
+        chart_container_left.append(container_for_chart)
+        myBarChart = new Chart(ctx).Bar(data_left, options)
+      else
+        chart_container_left.empty()
     )
 )
 

@@ -19,29 +19,40 @@ section.analytics.row
 
   .wrapper
     .col-sm-6.col-xs-12
-      .chart-insides-left
       .thumbnail
         .caption
-          h3.text-center Latest reports
-          - if @documents.any?
-            - @documents.each do |doc|
-              .news-record
-                h4 = link_to category_name(doc.category_id), category_path(doc.category_id)
-                span == " (#{link_to time_ago_in_words(doc.created_at), document_path(doc)})"
-                - if (points = doc.result.points) >= 0
-                  span.label.label-success
-                    = "+ #{points}"
-                - else
-                    span.label.label-danger
-                      = points
-                p = doc.data
-            = link_to '...', documents_path
-          - else
-            h3 Sorry, no fetched information yet..
+          h3.text-center Historical trends
+          h5.text-center by day
+          .chart-insides-left
 
     .col-sm-6.col-xs-12
       .thumbnail
         .caption
-          h3.text-center Compare influence
+          h3.text-center Compare positive influence
+          h5.text-center of each category
           .chart-insides-right
+
+section.news.row
+  h2.text-center LATEST REPORTS
+
+  .wrapper
+    .col-sm-12.col-xs-12
+     .thumbnail
+       .caption
+         h3.text-center Latest reports
+         - if @documents.any?
+           - @documents.each do |doc|
+             .news-record
+               h4 = link_to category_name(doc.category_id), category_path(doc.category_id)
+               span == " (#{link_to time_ago_in_words(doc.created_at), document_path(doc)})"
+               - if (points = doc.result.points) >= 0
+                 span.label.label-success
+                   = "+ #{points}"
+               - else
+                   span.label.label-danger
+                     = points
+               p = doc.data
+           = link_to '...', documents_path
+         - else
+           h3 Sorry, no fetched information yet..
 

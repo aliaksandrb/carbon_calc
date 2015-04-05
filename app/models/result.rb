@@ -28,6 +28,27 @@ class Result < ActiveRecord::Base
       }
     end
   end
+
+  def self.chart_data_for_insides_historical
+    chart_data = { labels: [], datasets: [] }
+
+    results = all.group_by do |result|
+      result.created_at.strftime('%d:%m:%y')
+    end
+
+    results.each do |date, array_of_results|
+      chart_data[:labels] << date
+
+      array_of_results.group_by(&:category_id).each do |category_id, data|
+        chart_data[:datasets] << {
+          label: Category.category_name_by_id(category_id),
+          data: [data.inject(0) { |sum, r| sum + r.points }]
+        }
+      end
+    end
+
+    chart_data
+  end
 end
 
 # == Schema Information

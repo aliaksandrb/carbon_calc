@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  get 'results/index'
-  get 'results/insides'
+  namespace :results do
+    get 'index'
+    get 'insides'
+    get 'insides_historical'
+  end
+
   get 'rules/get_operations' => 'rules#get_operations'
 
   resources :documents

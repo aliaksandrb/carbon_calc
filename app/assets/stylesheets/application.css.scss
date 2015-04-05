@@ -24,6 +24,8 @@ $light-green: rgba(40, 182, 44, 1);
 
 footer {
   .footer-content {
+    border: 1px solid #ddd;
+
     .footer-links li {
       padding: 0 0.5em;
       border-left: solid 1px #CCC;
@@ -32,7 +34,7 @@ footer {
     a { color: $light-green; }
 
     .copyright {
-      margin: 10px 0 0 0;
+      margin: 20px 0 0 0;
 
       a {
         &:hover {

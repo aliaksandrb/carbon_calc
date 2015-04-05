@@ -1,31 +1,36 @@
 section.chart-area.row
-  h2.text-center Overview
+  h2.text-center OVERVIEW
 
-  .col-sm-2.col-xs-12
-    ul.chart-nav.nav.text-left
-      li = link_to 'General Overview', root_path({ category_id: 0 }),
-        class: @category_name == 'General Overview' ? 'active' : ''
+  .wrapper
+    .col-sm-2.col-xs-12
+      ul.chart-nav.nav.text-left
+        li = link_to 'General Overview', root_path({ category_id: 0 }),
+          class: @category_name == 'General Overview' ? 'active' : ''
 
-      - @categories.each do |category|
-        li = link_to category.name, root_path({ category_id: category.id }),
-          class: category.id.to_s == params[:category_id] ? 'active' : ''
+        - @categories.each do |category|
+          li = link_to category.name, root_path({ category_id: category.id }),
+            class: category.id.to_s == params[:category_id] ? 'active' : ''
 
-  .col-sm-10.col-xs-12
-    .chart-container
+    .col-sm-10.col-xs-12
+      .chart-container
 
 section.analytics.row
-  h2.text-center Insides
-  .col-sm-6.col-xs-12
-    .chart-insides-left
-  .col-sm-6.col-xs-12
-    .chart-insides-right
+  h2.text-center INSIDES
 
-.panel
-  - if @documents.any?
-    - @documents.each do |doc|
-      p
-        h3 = doc.created_at
-        p = doc.data
-  - else
-    h3 Sorry, no fetched information yet..
+  .wrapper
+    .col-sm-6.col-xs-12
+      .chart-insides-left
+      .panel
+        h4.text-center Latest reports
+        - if @documents.any?
+          - @documents.each do |doc|
+            p
+              h3 = doc.created_at
+              p = doc.data
+        - else
+          h3 Sorry, no fetched information yet..
+
+    .col-sm-6.col-xs-12
+      h4.text-center Compare influence
+      .chart-insides-right
 

@@ -21,10 +21,18 @@ section.chart-area {
   margin: 50px 0 50px 0;
 }
 
-h2 {
+h2, h3 {
   color: $light-green;
 }
 
 section {
   margin: 20px 0 0 0;
+}
+
+section.analytics {
+  a { color: $light-green; }
+
+  .news-record {
+    h4, span { display: inline; }
+  }
 }

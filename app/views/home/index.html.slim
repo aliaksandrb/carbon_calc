@@ -20,17 +20,22 @@ section.analytics.row
   .wrapper
     .col-sm-6.col-xs-12
       .chart-insides-left
-      .panel
-        h4.text-center Latest reports
-        - if @documents.any?
-          - @documents.each do |doc|
-            p
-              h3 = doc.created_at
-              p = doc.data
-        - else
-          h3 Sorry, no fetched information yet..
+      .thumbnail
+        .caption
+          h3.text-center Latest reports
+          - if @documents.any?
+            - @documents.each do |doc|
+              .news-record
+                h4 = link_to category_name(doc.category_id), category_path(doc.category_id)
+                span == " (#{link_to time_ago_in_words(doc.created_at), document_path(doc)})"
+                p = doc.data
+            = link_to '...', documents_path
+          - else
+            h3 Sorry, no fetched information yet..
 
     .col-sm-6.col-xs-12
-      h4.text-center Compare influence
-      .chart-insides-right
+      .thumbnail
+        .caption
+          h3.text-center Compare influence
+          .chart-insides-right
 

@@ -28,11 +28,7 @@ end
 #  operation   :string           not null
 #  comparative :string           not null
 #  points      :integer          default(0)
-#  category_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#
-# Indexes
-#
-#  index_rules_on_category_id  (category_id)
+#  category_id :integer
 #

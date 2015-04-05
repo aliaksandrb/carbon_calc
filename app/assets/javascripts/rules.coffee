@@ -46,8 +46,13 @@ $( ->
   set_type_for_field_name = (field_type) ->
     $('#rule_field_type').val(field_type).change()
 
-  category_dropdown = $('#rule_category_id')
-  if category_dropdown.length > 0
+
+  if $("form[id^='edit_rule_']").size() > 0
+    category_dropdown = $('#rule_category')
+  else
+    category_dropdown = $('#rule_category_id')
+
+  if category_dropdown.size() > 0
     set_fields_for_category(category_dropdown.val())
 
     category_dropdown.on('change', ->
@@ -55,7 +60,7 @@ $( ->
     )
 
     fields_dropdown = $('#rule_field_name')
-    if fields_dropdown.length > 0
+    if fields_dropdown.size() > 0
       fields_dropdown.on('change', ->
         set_type_for_field_name($('#rule_field_name').find("option:selected").data('type'))
       )

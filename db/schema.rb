@@ -11,11 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404224947) do
+ActiveRecord::Schema.define(version: 20150405081721) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
   end
+
+  create_table "categories_fields", id: false, force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "field_id",    null: false
+  end
+
+  add_index "categories_fields", ["category_id", "field_id"], name: "index_categories_fields_on_category_id_and_field_id"
+  add_index "categories_fields", ["field_id", "category_id"], name: "index_categories_fields_on_field_id_and_category_id"
 
   create_table "documents", force: :cascade do |t|
     t.text     "data",        null: false
@@ -27,13 +35,10 @@ ActiveRecord::Schema.define(version: 20150404224947) do
   add_index "documents", ["category_id"], name: "index_documents_on_category_id"
 
   create_table "fields", force: :cascade do |t|
-    t.string  "name",                             null: false
-    t.string  "field_type",    default: "string"
-    t.string  "default_value"
-    t.integer "category_id"
+    t.string "name",                             null: false
+    t.string "field_type",    default: "string"
+    t.string "default_value"
   end
-
-  add_index "fields", ["category_id"], name: "index_fields_on_category_id"
 
   create_table "rules", force: :cascade do |t|
     t.string   "field_type",  default: "Integer"
@@ -41,11 +46,9 @@ ActiveRecord::Schema.define(version: 20150404224947) do
     t.string   "operation",                       null: false
     t.string   "comparative",                     null: false
     t.integer  "points",      default: 0
-    t.integer  "category_id"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.integer  "category_id"
   end
-
-  add_index "rules", ["category_id"], name: "index_rules_on_category_id"
 
 end

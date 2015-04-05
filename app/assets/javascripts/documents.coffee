@@ -28,8 +28,8 @@ $( ->
 
   dropdown = $('#document_category_id')
 
-  if dropdown.length > 0
-    unless $("form[id^='edit_document_']").length > 0
+  if dropdown.size() > 0
+    unless $("form[id^='edit_document_']").size() > 0
       add_fiedls_to_panel(dropdown.val())
 
     dropdown.on('change', ->

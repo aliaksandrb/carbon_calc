@@ -1,6 +1,6 @@
 class Field < ActiveRecord::Base
   SUPPORTED_TYPES = %w(Integer String Boolean)
-  belongs_to :category
+  has_and_belongs_to_many :categories
 
   before_validation :normalize_field_type
 
@@ -30,9 +30,4 @@ end
 #  name          :string           not null
 #  field_type    :string           default("string")
 #  default_value :string
-#  category_id   :integer
-#
-# Indexes
-#
-#  index_fields_on_category_id  (category_id)
 #

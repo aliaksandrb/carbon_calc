@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+.navbar-fixed-top, ul.nav.navbar-nav {
+  a.active {
+    color: rgba(40, 182, 44, 1);
+  }
+}

@@ -21,12 +21,42 @@ $( ->
       options_dropdown.html(options.join(''))
     )
 
+  set_fields_for_category = (category_id) ->
+    $.ajax({
+      url: '/fields',
+      data: {
+        category_id: category_id,
+        format: 'json'
+      },
+      dataType: 'JSON'
+    }).success((data) ->
+      fields_dropdown = $('#rule_field_name')
+      options = []
+
+      $.each(data, (index, value) ->
+        options.push(
+          "<option value='" + value.id + "'>" + value.name + "</option>"
+        )
+      )
+
+      fields_dropdown.empty()
+      fields_dropdown.html(options.join(''))
+    )
+
   field_type_dropdown = $('#rule_field_type')
+  category_dropdown = $('#rule_category_id')
 
   if field_type_dropdown.length > 0
     set_operations_for_field_type(field_type_dropdown.val().toLowerCase())
 
     field_type_dropdown.on('change', ->
       set_operations_for_field_type(this.value.toLowerCase())
+    )
+
+  if category_dropdown.length > 0
+    set_fields_for_category(category_dropdown.val())
+
+    category_dropdown.on('change', ->
+      set_fields_for_category(this.value)
     )
 )

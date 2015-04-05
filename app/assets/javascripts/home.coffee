@@ -98,15 +98,15 @@ $( ->
       },
       dataType: 'JSON'
     }).success((chart_data) ->
-      chart_container = $('.chart-insides')
+      chart_container_right = $('.chart-insides-right')
 
       if chart_data.length > 0
-        data = []
+        data_right = []
 
         $.each(chart_data, (index, value) ->
           color = randomColor()
 
-          data.push({
+          data_right.push({
             value: value.value,
             color: color,
             highlight: colorTone(color, 30),
@@ -117,14 +117,14 @@ $( ->
         options = {}
 
         container_for_chart = $('<canvas height="300" id="chart-insides" width="' +
-          chart_container.width() + '"></canvas>'
+          chart_container_right.width() + '"></canvas>'
         )
 
         ctx = container_for_chart.get(0).getContext("2d")
-        chart_container.append(container_for_chart)
-        myPieChart = new Chart(ctx).Pie(data, options)
+        chart_container_right.append(container_for_chart)
+        myPieChart = new Chart(ctx).Pie(data_right, options)
       else
-        chart_container.empty()
+        chart_container_right.empty()
     )
 )
 

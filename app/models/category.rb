@@ -5,6 +5,10 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true, format: { with: /\A[a-zA-Z]\w*\z/ }
   validates_presence_of :fields
+
+  def self.category_name_by_id(id)
+    find(id).name
+  end
 end
 
 # == Schema Information

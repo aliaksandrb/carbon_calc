@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require Chart.min
 //= require_tree .

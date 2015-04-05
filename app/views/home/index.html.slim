@@ -4,6 +4,7 @@ ul
   - @categories.each do |category|
     li = link_to category.name, root_path({ category_id: category.id })
 
+canvas#myChart width="600" height="400"
 
 .panel
   - if @documents.any?

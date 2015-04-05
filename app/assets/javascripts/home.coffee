@@ -2,6 +2,8 @@ $( ->
 
   chart_container = $('.chart-container')
   if chart_container.size() > 0
+    no_info = '<h3>Sorry, no fetched information yet..</h3>'
+
     scan = location.search.match(/category_id=(\d*)/)
 
     # https://css-tricks.com/snippets/javascript/lighten-darken-color/
@@ -88,7 +90,7 @@ $( ->
         ])
         myLineChart = new Chart(ctx).Line(data, options)
       else
-        chart_container.empty()
+        chart_container.html(no_info)
     )
 
     $.ajax({
@@ -127,7 +129,7 @@ $( ->
         myPieChart = new Chart(ctx).Pie(data_right, options)
         chart_container_right.append(myPieChart.generateLegend())
       else
-        chart_container_right.empty()
+        chart_container_right.html(no_info)
     )
 
     $.ajax({
@@ -173,7 +175,7 @@ $( ->
         myBarChart = new Chart(ctx).Bar(data_left, options)
         chart_container_left.append(myBarChart.generateLegend())
       else
-        chart_container_left.empty()
+        chart_container_left.html(no_info)
     )
 )
 

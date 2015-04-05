@@ -1,5 +1,6 @@
 class Document < ActiveRecord::Base
   belongs_to :category
+  has_one :result, dependent: :destroy
 
   validates :data, :category, presence: true
 

@@ -8,7 +8,7 @@
     = f.input :comparative
     = f.input :points
     - if @category
-      = f.input :category, collection: [@category], selected: @category.id, include_blank: false, disabled: true
+      = f.association :category, collection: [@category], include_blank: false
     - else
       = f.association :category, include_blank: false
 

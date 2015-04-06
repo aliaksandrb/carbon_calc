@@ -2,7 +2,7 @@ class Rule < ActiveRecord::Base
   SUPPORTED_OPERATIONS = %w(== != > < * / >= <=)
   belongs_to :category
 
-  validates :field_type, :field_name, :operation, :comparative, :points, presence: true
+  validates :field_type, :field_name, :operation, :comparative, :points, :category, presence: true
   validates :field_type, inclusion: { in: Field::SUPPORTED_TYPES }
   validates :operation, inclusion: { in: SUPPORTED_OPERATIONS }
 

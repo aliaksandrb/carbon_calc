@@ -13,14 +13,20 @@ $( ->
 
       $.each(data, (index, value) ->
         capitalized_name = value.name.charAt(0).toUpperCase() + value.name.slice(1).toLowerCase()
+        field_type = value.field_type.toLowerCase()
+        if field_type == 'integer'
+          field_type = 'number'
+        else
+          field_type = 'text'
 
         fields.push(
-          '<div class="form-group ' + value.field_type + ' optional field_' + value.name + '">' +
+          '<div class="form-group ' + field_type + ' optional field_' + value.name + '">' +
           '<label class="string optional control-label" for="field_' + value.name + '">' +
-          capitalized_name +
+          capitalized_name + ' : ' + field_type +
           '</label><input class="string optional form-control"' +
-          'name="document[data[' + value.name + ']]" id="field_' + value.name + '" type="' + value.field_type + '"></div>'
-          )
+          'name="document[data[' + value.name + ']]" id="field_' + value.name +
+          '" type="' + field_type + '"></div>'
+        )
       )
 
       panel.html(fields.join(''))

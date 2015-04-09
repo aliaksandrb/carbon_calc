@@ -4,6 +4,8 @@ class Document < ActiveRecord::Base
 
   validates :data, :category, presence: true
 
+  validate :check_data_attirubets
+
   after_save :create_result!
 
   def fields
@@ -25,6 +27,23 @@ class Document < ActiveRecord::Base
   end
 
   protected
+
+  def check_data_attirubets
+    data_hash = deserialize_data
+
+    if data_hash
+      data_hash.each do |k, v|
+        if v.blank?
+          errors.add(k, "can't be blank")
+        else
+          true
+          #check type byy Field.find
+        end
+      end
+    else
+      errors.add(:data_attributes, 'something wrong with provided data')
+    end
+  end
 
   def create_result!
     self.create_result(category_id: category_id, points: calculate_points)

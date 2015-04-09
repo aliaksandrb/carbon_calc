@@ -19,23 +19,42 @@ $( ->
         else
           field_type = 'text'
 
-        fields.push(
-          '<div class="form-group ' + field_type + ' optional field_' + value.name + '">' +
-          '<label class="string optional control-label" for="field_' + value.name + '">' +
-          capitalized_name + ' : ' + field_type +
-          '</label><input class="string optional form-control"' +
-          'name="document[data[' + value.name + ']]" id="field_' + value.name +
-          '" type="' + field_type + '"></div>'
-        )
+        error = errors['document_' + value.name]
+        if error
+          console.log('errror')
+          fields.push(
+            '<div class="form-group ' + field_type + ' optional field_' + value.name + ' has-error">' +
+              '<label class="string optional control-label" for="field_' + value.name + '">' +
+                capitalized_name + ' : ' + field_type + '</label>' +
+              '<input class="string optional form-control"' +
+                'name="document[data[' + value.name + ']]" id="field_' + value.name +
+                '" type="' + field_type + '">' +
+                error.prop('outerHTML') +
+            '</div>'
+          )
+        else
+          fields.push(
+            '<div class="form-group ' + field_type + ' optional field_' + value.name + '">' +
+            '<label class="string optional control-label" for="field_' + value.name + '">' +
+            capitalized_name + ' : ' + field_type +
+            '</label><input class="string optional form-control"' +
+            'name="document[data[' + value.name + ']]" id="field_' + value.name +
+            '" type="' + field_type + '"></div>'
+          )
       )
 
       panel.html(fields.join(''))
     )
 
   dropdown = $('#document_category_id')
+  errors = {}
 
   if dropdown.size() > 0
     unless $("form[id^='edit_document_']").size() > 0
+      fields_with_error = $('.has-error').each((index, field) ->
+        errors[$(field).find('label').prop('for')] = $(field).find('span.help-block')
+      )
+
       add_fiedls_to_panel(dropdown.val())
 
     dropdown.on('change', ->

@@ -36,12 +36,11 @@ class Document < ActiveRecord::Base
         if v.blank?
           errors.add(k, "can't be blank")
         else
-          true
-          #check type byy Field.find
+          check_consistancy_between_field_type_and_its_value(k, v)
         end
       end
     else
-      errors.add(:data_attributes, 'something wrong with provided data')
+      errors.add(:data, 'something wrong with provided data')
     end
   end
 
@@ -52,6 +51,26 @@ class Document < ActiveRecord::Base
   def calculate_points
     Rule.calculate_for!(self)
   end
+
+  def check_consistancy_between_field_type_and_its_value(name, value)
+    field = Field.find_by(name: name)
+
+    if field
+      case field.field_type
+      when 'Integer'
+        unless value =~ /\A-?\d+\z/
+          errors.add(name, 'should be a number')
+        end
+      when 'Boolean'
+        unless value.in?(%w(true false))
+          errors.add(name, 'could be only "true" or "false"')
+        end
+      end
+    else
+      errors.add(name, 'something is wrong with fields provided')
+    end
+  end
+
 end
 
 # == Schema Information

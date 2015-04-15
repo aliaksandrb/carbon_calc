@@ -2,14 +2,15 @@
 
 $light-green: rgba(40, 182, 44, 1);
 $navbar-height: 40px;
+$almost-white: rgb(248, 248, 248);
 $text-color: rgb(119, 119, 119);
 $navbar-inverse-color: $text-color;
 $navbar-inverse-bg: rgb(78, 93, 108);
 
-$navbar-inverse-link-color: rgb(248, 248, 248);
+$navbar-inverse-link-color: $almost-white;
 $navbar-inverse-link-hover-color: $light-green;
 $navbar-inverse-link-active-color: $light-green;
-$navbar-inverse-brand-color: rgb(248, 248, 248);
+$navbar-inverse-brand-color: $almost-white;
 $navbar-inverse-brand-hover-color: $light-green;
 
 @import "bootstrap";
@@ -22,7 +23,19 @@ img {
 // override for the 'Home' navigation link
 .navbar-brand {
   font-size: inherit;
+}
+
+.navbar-nav {
+  li.new-report > a:hover,
+  li.new-report > a:focus {
+    color: $almost-white;
+    background-color: #449D44;
   }
+
+  .btn {
+    border-radius: 0px;
+  }
+}
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes

@@ -1,4 +1,5 @@
 $( ->
+  charts_loaded = false
 
   chart_container = $('.chart-container')
   if chart_container.size() > 0
@@ -93,89 +94,94 @@ $( ->
         chart_container.html(no_info)
     )
 
-    $.ajax({
-      url: '/results/insides',
-      data: {
-        format: 'json',
-      },
-      dataType: 'JSON'
-    }).success((chart_data) ->
-      chart_container_right = $('.chart-insides-right')
+  $(window).scroll(->
+    if $(this).scrollTop() > 200 && !charts_loaded
+      charts_loaded = true
 
-      if chart_data.length > 0
-        data_right = []
+      $.ajax({
+        url: '/results/insides',
+        data: {
+          format: 'json',
+        },
+        dataType: 'JSON'
+      }).success((chart_data) ->
+        chart_container_right = $('.chart-insides-right')
 
-        $.each(chart_data, (index, value) ->
-          color = randomColor()
+        if chart_data.length > 0
+          data_right = []
 
-          data_right.push({
-            value: value.value,
-            color: color,
-            highlight: colorTone(color, 20),
-            label: value.label
-          })
-        )
+          $.each(chart_data, (index, value) ->
+            color = randomColor()
 
-        options = {
-          legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend list-unstyled \"><% for (var i=0; i<segments.length; i++){%><li><span class=\"glyphicon glyphicon-tree-deciduous\" aria-hidden=\"true\" style=\"background-color:<%=segments[i].fillColor%>;color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-        }
+            data_right.push({
+              value: value.value,
+              color: color,
+              highlight: colorTone(color, 20),
+              label: value.label
+            })
+          )
 
-        container_for_chart = $('<canvas height="300" id="chart-insides-right" width="' +
-          chart_container_right.width() + '"></canvas>'
-        )
+          options = {
+            legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend list-unstyled \"><% for (var i=0; i<segments.length; i++){%><li><span class=\"glyphicon glyphicon-tree-deciduous\" aria-hidden=\"true\" style=\"background-color:<%=segments[i].fillColor%>;color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+          }
 
-        ctx = container_for_chart.get(0).getContext("2d")
-        chart_container_right.append(container_for_chart)
-        myPieChart = new Chart(ctx).Pie(data_right, options)
-        chart_container_right.append(myPieChart.generateLegend())
-      else
-        chart_container_right.html(no_info)
-    )
+          container_for_chart = $('<canvas height="300" id="chart-insides-right" width="' +
+            chart_container_right.width() + '"></canvas>'
+          )
 
-    $.ajax({
-      url: '/results/insides_historical',
-      data: {
-        format: 'json',
-      },
-      dataType: 'JSON'
-    }).success((chart_data) ->
-      chart_container_left = $('.chart-insides-left')
+          ctx = container_for_chart.get(0).getContext("2d")
+          chart_container_right.append(container_for_chart)
+          myPieChart = new Chart(ctx).Pie(data_right, options)
+          chart_container_right.append(myPieChart.generateLegend())
+        else
+          chart_container_right.html(no_info)
+      )
 
-      if chart_data.labels.length > 0
-        data_left = {
-          labels: chart_data.labels,
-        }
+      $.ajax({
+        url: '/results/insides_historical',
+        data: {
+          format: 'json',
+        },
+        dataType: 'JSON'
+      }).success((chart_data) ->
+        chart_container_left = $('.chart-insides-left')
 
-        datasets = []
+        if chart_data.labels.length > 0
+          data_left = {
+            labels: chart_data.labels,
+          }
 
-        $.each(chart_data.datasets, (index, value) ->
-          color = randomColor()
+          datasets = []
 
-          datasets.push({
-            label: value.label,
-            fillColor: color,
-            strokeColor: colorTone(color, -40),
-            highlightFill: colorTone(color, 20),
-            highlightStroke: colorTone(color, -20),
-            data: value.data
-          })
-        )
+          $.each(chart_data.datasets, (index, value) ->
+            color = randomColor()
 
-        data_left.datasets = datasets
-        options = {
-            legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend list-unstyled\"><% for (var i=0; i<datasets.length; i++){%><li><span class=\"glyphicon glyphicon-tree-deciduous\" aria-hidden=\"true\" style=\"background-color:<%=datasets[i].fillColor%>;color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-        }
+            datasets.push({
+              label: value.label,
+              fillColor: color,
+              strokeColor: colorTone(color, -40),
+              highlightFill: colorTone(color, 20),
+              highlightStroke: colorTone(color, -20),
+              data: value.data
+            })
+          )
 
-        container_for_chart = $('<canvas height="300" id="chart-insides-left" width="' +
-          chart_container_left.width() + '"></canvas>'
-        )
+          data_left.datasets = datasets
+          options = {
+              legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend list-unstyled\"><% for (var i=0; i<datasets.length; i++){%><li><span class=\"glyphicon glyphicon-tree-deciduous\" aria-hidden=\"true\" style=\"background-color:<%=datasets[i].fillColor%>;color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+          }
 
-        ctx = container_for_chart.get(0).getContext("2d")
-        chart_container_left.append(container_for_chart)
-        myBarChart = new Chart(ctx).Bar(data_left, options)
-        chart_container_left.append(myBarChart.generateLegend())
-      else
-        chart_container_left.html(no_info)
-    )
+          container_for_chart = $('<canvas height="300" id="chart-insides-left" width="' +
+            chart_container_left.width() + '"></canvas>'
+          )
+
+          ctx = container_for_chart.get(0).getContext("2d")
+          chart_container_left.append(container_for_chart)
+          myBarChart = new Chart(ctx).Bar(data_left, options)
+          chart_container_left.append(myBarChart.generateLegend())
+        else
+          chart_container_left.html(no_info)
+      )
+  )
 )
 

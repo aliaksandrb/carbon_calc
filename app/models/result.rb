@@ -21,9 +21,13 @@ class Result < ActiveRecord::Base
   end
 
   def self.chart_data_for_insides
+    all_categories = Category.all.each_with_object({}) do |category, memo|
+      memo[category.id] = category.name
+    end
+
     all.group_by(&:category_id).map do |category_id, results|
       {
-        label: Category.category_name_by_id(category_id),
+        label: all_categories[category_id],
         value: results.inject(0) { |sum, r| sum + r.points }
       }
     end
@@ -36,15 +40,26 @@ class Result < ActiveRecord::Base
       result.created_at.strftime('%d:%m:%y')
     end
 
+    all_categories = Category.all.each_with_object({}) do |category, memo|
+      memo[category.id] =  [category.name, Array.new(results.size, 0)]
+    end
+
+    i = 0
     results.each do |date, array_of_results|
       chart_data[:labels] << date
 
       array_of_results.group_by(&:category_id).each do |category_id, data|
-        chart_data[:datasets] << {
-          label: Category.category_name_by_id(category_id),
-          data: [data.inject(0) { |sum, r| sum + r.points }]
-        }
+        all_categories[category_id].last[i] = data.inject(0) { |sum, r| sum + r.points }
       end
+
+      i += 1
+    end
+
+    all_categories.each do |category_id, name_and_data|
+      chart_data[:datasets] << {
+        label: name_and_data.first,
+        data: name_and_data.last
+      }
     end
 
     chart_data

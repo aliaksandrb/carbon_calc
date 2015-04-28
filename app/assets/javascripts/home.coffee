@@ -1,4 +1,40 @@
 $( ->
+  # https://css-tricks.com/snippets/javascript/lighten-darken-color/
+  colorTone = (col, amt) ->
+    usePound = false
+
+    if col[0] == "#"
+      col = col.slice(1)
+      usePound = true
+
+    num = parseInt(col, 16)
+    r = (num >> 16) + amt
+
+    if r > 255
+      r = 255
+    else if r < 0
+      r = 0
+
+    b = ((num >> 8) & 0x00FF) + amt
+
+    if b > 255
+      b = 255
+    else if b < 0
+      b = 0
+
+    g = (num & 0x0000FF) + amt
+
+    if g > 255
+      g = 255
+    else if g < 0
+      g = 0
+
+    str = if usePound then '#' else ''
+    return str + (g | (b << 8) | (r << 16)).toString(16)
+
+  randomColor = ->
+    return '#' + Math.random().toString(16).slice(2, 8)
+
   charts_loaded = false
 
   chart_container = $('.chart-container')
@@ -6,42 +42,6 @@ $( ->
     no_info = '<h3>Sorry, no fetched information yet..</h3>'
 
     scan = location.search.match(/category_id=(\d*)/)
-
-    # https://css-tricks.com/snippets/javascript/lighten-darken-color/
-    colorTone = (col, amt) ->
-      usePound = false
-
-      if col[0] == "#"
-        col = col.slice(1)
-        usePound = true
-
-      num = parseInt(col, 16)
-      r = (num >> 16) + amt
-
-      if r > 255
-        r = 255
-      else if r < 0
-        r = 0
-
-      b = ((num >> 8) & 0x00FF) + amt
-
-      if b > 255
-        b = 255
-      else if b < 0
-        b = 0
-
-      g = (num & 0x0000FF) + amt
-
-      if g > 255
-        g = 255
-      else if g < 0
-        g = 0
-
-      str = if usePound then '#' else ''
-      return str + (g | (b << 8) | (r << 16)).toString(16)
-
-    randomColor = ->
-      return '#' + Math.random().toString(16).slice(2, 8)
 
     if scan && scan.length == 2
       category_id = scan[1] || 0
@@ -130,7 +130,7 @@ $( ->
           )
 
           ctx = container_for_chart.get(0).getContext("2d")
-          chart_container_right.append(container_for_chart)
+          chart_container_right.empty().append(container_for_chart)
           myPieChart = new Chart(ctx).Pie(data_right, options)
           chart_container_right.append(myPieChart.generateLegend())
         else
@@ -176,7 +176,7 @@ $( ->
           )
 
           ctx = container_for_chart.get(0).getContext("2d")
-          chart_container_left.append(container_for_chart)
+          chart_container_left.empty().append(container_for_chart)
           myBarChart = new Chart(ctx).Bar(data_left, options)
           chart_container_left.append(myBarChart.generateLegend())
         else

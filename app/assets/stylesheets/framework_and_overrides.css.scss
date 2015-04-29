@@ -6,12 +6,27 @@ $almost-white: rgb(248, 248, 248);
 $text-color: rgb(119, 119, 119);
 $navbar-inverse-color: $text-color;
 $navbar-inverse-bg: rgb(78, 93, 108);
+$backgroud-color: #eee;
+$brand-success: #5cb85c;
 
 $navbar-inverse-link-color: $almost-white;
 $navbar-inverse-link-hover-color: $light-green;
 $navbar-inverse-link-active-color: $light-green;
 $navbar-inverse-brand-color: $almost-white;
 $navbar-inverse-brand-hover-color: $light-green;
+
+$pagination-color: $text-color !default;
+$pagination-bg: $backgroud-color !default;
+//$pagination-border: #ddd !default;
+$pagination-hover-color: $almost-white !default;
+$pagination-hover-bg: $brand-success !default;
+$pagination-hover-border: $brand-success !default;
+//$pagination-active-color: #fff !default;
+$pagination-active-bg: $brand-success !default;
+$pagination-active-border: $brand-success !default;
+//$pagination-disabled-color: $gray-light !default;
+$pagination-disabled-bg: $backgroud-color !default;
+//$pagination-disabled-border: #ddd !default;
 
 @import "bootstrap";
 
@@ -60,7 +75,7 @@ img {
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #eee;
+  background-color: $backgroud-color;
   padding-bottom: 80px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar

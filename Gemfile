@@ -10,12 +10,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
-gem 'bootstrap-sass'
-gem 'simple_form'
-gem 'slim-rails'
-
-gem 'jquery-turbolinks'
-
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
@@ -33,3 +27,10 @@ group :production do
   gem 'unicorn'
   gem 'mysql2'
 end
+
+gem 'bootstrap-sass'
+gem 'simple_form'
+gem 'slim-rails'
+gem 'kaminari'
+gem 'jquery-turbolinks'
+

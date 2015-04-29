@@ -9,7 +9,7 @@ class FieldsController < ApplicationController
     @fields = unless category_id.blank?
       Category.find(category_id).fields
     else
-      Field.all
+      Field.all.page params[:page]
     end
   end
 

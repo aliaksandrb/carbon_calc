@@ -4,7 +4,7 @@ class RulesController < ApplicationController
   # GET /rules
   # GET /rules.json
   def index
-    @rules = Rule.includes(:category).all
+    @rules = Rule.includes(:category).all.page params[:page]
   end
 
   # GET /rules/1

@@ -6,6 +6,7 @@ $almost-white: rgb(248, 248, 248);
 $text-color: rgb(119, 119, 119);
 $navbar-inverse-color: $text-color;
 $navbar-inverse-bg: rgb(78, 93, 108);
+$navbar-inverse-border: #ddd;
 $backgroud-color: #eee;
 $brand-success: #5cb85c;
 
@@ -74,13 +75,13 @@ img {
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
-  @extend .container;
-  background-color: $backgroud-color;
+  //@extend .container;
   padding-bottom: 80px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar
   }
+
 section {
-  @extend .row;
+  //@extend .row;
   margin-top: 20px;
-  }
+}

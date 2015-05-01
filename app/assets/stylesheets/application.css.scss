@@ -16,6 +16,22 @@
  */
 
 $light-green: rgba(40, 182, 44, 1);
+$footer-height: 70px;
+$background-color: #eee;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-family: verdana, arial, helvetica, sans-serif;
+  background-color: $background-color;
+  margin: 0 0 $footer-height 0;
+  color: #333;
+  font-size: 13px;
+  line-height: 18px;
+}
 
 .navbar-fixed-top, ul.nav.navbar-nav {
   span.glyphicon {
@@ -29,8 +45,15 @@ $light-green: rgba(40, 182, 44, 1);
 }
 
 footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: $footer-height;
+  width: 100%;
+  background-color: rgb(78, 93, 108);
+
   .footer-content {
-    border: 1px solid #ddd;
+    border-top: 1px solid #ddd;
 
     .footer-links li {
       padding: 0 0.5em;

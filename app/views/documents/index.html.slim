@@ -9,17 +9,11 @@ table
       th
       th
 
-  tbody
-    - @documents.each do |document|
-      tr
-        td = document.data
-        td = document.category_id
-        td = link_to 'Show', document
-        td = link_to 'Edit', edit_document_path(document)
-        td = link_to 'Destroy', document, data: {:confirm => 'Are you sure?'}, :method => :delete
-
+  tbody#documents-body
+    = render @documents
 br
 
 = link_to 'New Document', new_document_path
 br
-= paginate @documents
+#paginator
+  = paginate @documents, remote: true

@@ -1,0 +1,6 @@
+tr.category
+  td = category.name
+  td = link_to 'Show', category
+  td = link_to 'Edit', edit_category_path(category)
+  td = link_to 'Destroy', category, data: {:confirm => 'Are you sure?'}, :method => :delete
+

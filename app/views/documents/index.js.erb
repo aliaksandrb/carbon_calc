@@ -1,4 +1,4 @@
-$("#documents-body").html(
+$('#documents-body').html(
   "<%= j(render(@documents)) %>"
 );
 $('#paginator').html('<%= j(paginate(@documents, remote: true).to_s) %>');

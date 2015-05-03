@@ -1,0 +1,4 @@
+$('#categories-body').html(
+  "<%= j(render(@categories)) %>"
+);
+$('#paginator').html('<%= j(paginate(@categories, remote: true).to_s) %>');

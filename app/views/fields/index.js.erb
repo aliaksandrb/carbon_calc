@@ -1,0 +1,4 @@
+$('#fields-body').html(
+  "<%= j(render(@fields)) %>"
+);
+$('#paginator').html('<%= j(paginate(@fields, remote: true).to_s) %>');

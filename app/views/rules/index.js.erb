@@ -1,0 +1,4 @@
+$('#rules-body').html(
+  "<%= j(render(@rules)) %>"
+);
+$('#paginator').html('<%= j(paginate(@rules, remote: true).to_s) %>');

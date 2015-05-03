@@ -18,6 +18,7 @@ table
 br
 
 = link_to 'New Rule', new_rule_path
-br
-#paginator
-  = paginate @rules, remote: true
+
+- content_for :pagination
+  #paginator
+    = paginate @rules, remote: true

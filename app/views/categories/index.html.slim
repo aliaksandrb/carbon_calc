@@ -13,6 +13,7 @@ table
 br
 
 = link_to 'New Category', new_category_path
-br
-#paginator
-  = paginate @categories, remote: true
+
+- content_for :pagination
+  #paginator
+    = paginate @categories, remote: true

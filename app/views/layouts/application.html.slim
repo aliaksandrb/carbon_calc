@@ -16,5 +16,8 @@ html
       .container
         == render 'layouts/messages'
         == yield
+        .pagination-block
+          .text-center
+            == yield(:pagination)
     footer
       == render 'layouts/footer'

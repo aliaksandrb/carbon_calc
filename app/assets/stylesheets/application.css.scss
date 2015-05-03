@@ -55,6 +55,13 @@ body {
 
 }
 
+.pagination-block {
+  position: absolute;
+  bottom: $footer-height + 10;
+  left: 0;
+  width: 100%;
+}
+
 footer {
   position: absolute;
   bottom: 0;

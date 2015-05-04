@@ -1,5 +1,6 @@
 class FieldsController < ApplicationController
   before_action :set_field, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
 
   # GET /fields
   # GET /fields.json

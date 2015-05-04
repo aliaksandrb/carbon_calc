@@ -33,4 +33,4 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'kaminari'
 gem 'jquery-turbolinks'
-
+gem 'devise'

@@ -13,3 +13,7 @@ nav.navbar.navbar-inverse.navbar-fixed-top
         == render 'layouts/navigation_links'
       ul.nav.navbar-nav.navbar-right.
         li.new-report = link_to 'New Report', new_document_path, class: 'btn btn-success'
+        li = link_to 'Sign Up', new_user_registration_path, class: 'btn btn-success'
+        li = link_to 'Login',  new_user_session_path , class: 'btn btn-info'
+        li = link_to 'Logout', destroy_user_session_path,
+               method: :delete, class: 'btn btn-danger'

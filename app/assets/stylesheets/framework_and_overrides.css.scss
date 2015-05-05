@@ -14,7 +14,27 @@ $navbar-inverse-link-color: $almost-white;
 $navbar-inverse-link-hover-color: $light-green;
 $navbar-inverse-link-active-color: $light-green;
 $navbar-inverse-brand-color: $almost-white;
+// $navbar-inverse-open-backgroud-color: #39444e;
 //$navbar-inverse-brand-hover-color: $light-green;
+
+.navbar-inverse ul.dropdown-menu {
+  background-color: $navbar-inverse-bg;
+  font-size: inherit;
+  //border-radius: 0;
+
+  a {
+    color: $navbar-inverse-link-color;
+
+    &:hover, &:active {
+      background-color: $navbar-inverse-bg;
+      color: $navbar-inverse-link-hover-color;
+    }
+
+    i {
+      padding-right: 5px;
+    }
+  }
+}
 
 $pagination-color: $text-color !default;
 $pagination-bg: $backgroud-color !default;

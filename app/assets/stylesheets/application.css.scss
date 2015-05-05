@@ -53,6 +53,12 @@ body {
     color: $light-green;
   }
 
+  .links-separator {
+    display: block;
+    position: relative;
+    padding: 10px 0px;
+    color: $almost-white;
+  }
 }
 
 .pagination-block {

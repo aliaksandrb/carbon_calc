@@ -23,9 +23,9 @@ nav.navbar.navbar-inverse.navbar-fixed-top
                 | Settings
               li = link_to destroy_user_session_path, method: :delete do
                 i.glyphicon.glyphicon-off[aria-hidden='true']
-                | Logout
+                | Log Out
         - else
-          li = link_to 'Login', new_user_session_path
+          li = link_to 'Log In', new_user_session_path
           li
             span.links-separator
               | /

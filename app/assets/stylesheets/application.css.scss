@@ -19,6 +19,7 @@ $light-green: rgba(40, 182, 44, 1);
 $footer-height: 70px;
 $background-color: #eee;
 $almost-white: rgb(248, 248, 248);
+$state-danger-text: #a94442 !default;
 
 html {
   position: relative;
@@ -119,6 +120,15 @@ footer {
 
     }
 
+  }
+
+}
+
+a.link-danger {
+  color: $state-danger-text;
+
+  &:hover, &:focus {
+    color: $state-danger-text;
   }
 
 }

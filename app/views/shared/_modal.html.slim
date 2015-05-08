@@ -1,0 +1,42 @@
+- modal_label = modal_label || modal_id + '_label'
+
+.modal.fade[id=modal_id tabindex="-1" role="dialog" aria-labelledby=modal_label aria-hidden="true"]
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | &times;
+        h2.modal-title[id=modal_label]
+          = modal_title if defined?(modal_title)
+      .modal-body
+        = simple_form_for(resource,
+                          as: resource_name,
+                          url: session_path(resource_name),
+                          wrapper: :horizontal_form,
+                          html: { class: 'form-horizontal' }) do |f|
+          .form-inputs
+            = f.input :email, required: true, autofocus: true,
+              placeholder: 'Email or Username'
+            = f.input :password, required: true,
+              placeholder: 'Password'
+            .form-group
+              .col-sm-offset-3.col-sm-6
+                .checkbox
+                  = f.input_field :remember_me, as: :boolean,
+                    inline_label: 'Remember me',
+                    label_html: { class: 'control-label' } if devise_mapping.rememberable?
+          .form-actions
+            .form-group
+              .col-sm-offset-3.col-sm-6
+                = f.button :submit, 'Log In', class: 'btn btn-block btn-success'
+            .form-group
+              .col-sm-offset-3.col-sm-6
+                .text-center
+                  = render "devise/shared/links"
+        = modal_body if defined?(modal_body)
+      .modal-footer
+        button.btn-btn-danger[type="button" data-dismiss="modal"]
+          | Close
+        = modal_footer if defined?(modal_footer)
+

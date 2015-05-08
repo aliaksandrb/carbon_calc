@@ -12,6 +12,7 @@ html
     header
       == render 'layouts/navigation'
       == render 'layouts/beta'
+      == render partial: 'shared/modal', locals: { modal_id: 'login_modal', modal_title: 'Log In' }
     main[role="main"]
       .container
         == render 'layouts/messages'

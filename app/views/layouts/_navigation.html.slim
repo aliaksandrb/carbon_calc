@@ -28,7 +28,8 @@ nav.navbar.navbar-inverse.navbar-fixed-top
                 i.glyphicon.glyphicon-off[aria-hidden='true']
                 | Log Out
         - else
-          li = link_to 'Log In', new_user_session_path
+          //li = link_to 'Log In', new_user_session_path
+          li = link_to 'Log In','#', data: { toggle: "modal", target: "#login_modal" }
           li
             span.links-separator
               | /

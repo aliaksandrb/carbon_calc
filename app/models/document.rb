@@ -4,7 +4,7 @@ class Document < ActiveRecord::Base
 
   validates :data, :category, presence: true
 
-  validate :check_data_attirubets
+  validate :check_data_attributes
 
   after_save :create_result!
 
@@ -28,7 +28,7 @@ class Document < ActiveRecord::Base
 
   protected
 
-  def check_data_attirubets
+  def check_data_attributes
     data_hash = deserialize_data
 
     if data_hash

@@ -34,3 +34,6 @@ gem 'slim-rails'
 gem 'kaminari'
 gem 'jquery-turbolinks'
 gem 'devise'
+
+
+gem "mongoid", '~> 4.0.0'
